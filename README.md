@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+1. Clone the project
+2. Install ruby version 3.1.0
+3. Run the installer
 
-* Ruby version
+    `./bin/setup`
+4. Start the server
+    `rails server`
+5. Start Sidekiq
+    `bundle exec sidekiq`
 
-* System dependencies
+## Adding users
 
-* Configuration
+Start rails console `rails console` and run `User.create!(token: <TOKEN HERE>)`
 
-* Database creation
+## API
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Adding photos:
+    Make a POST request to `localhost:3000/photos` with the user's token in Authorization header in the format `Token <TOKEN HERE>`. The body should include `photo_urls` array that includes a list of valid URLs (example valid URL: `https://www.example.com/photo.jpg`)
