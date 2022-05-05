@@ -1,6 +1,8 @@
 class Photo < ApplicationRecord
   validate :url_format
 
+  scope :unprocessed, -> { where(processed_at: nil) }
+
   def self.import_photos(urls)
     Photo.transaction do
       urls.each do |url|
