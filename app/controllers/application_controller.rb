@@ -5,6 +5,8 @@ class ApplicationController < ActionController::API
 
   def photos
     if Photo.import_photos(photos_params[:photo_urls])
+      PhotosProcessingJob.perform_later
+
       render json: "Photos created.", status: :ok
     else
       render json: "Invalid URLs.", status: :unprocessable_entity
